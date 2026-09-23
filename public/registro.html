@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crear cuenta — JOSWEAR</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="logo">JOS<span>WEAR</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="tienda.html">Tienda</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-auth"></span>
+      <a href="carrito.html" class="cart-link">Carrito <span class="cart-badge">0</span></a>
+    </div>
+    <button class="nav-toggle">☰</button>
+  </nav>
+</header>
+
+<section class="auth-shell">
+  <form class="form-card" id="registerForm">
+    <h1>Crear cuenta</h1>
+    <p class="lead">Únete a JOSWEAR y guarda tu historial de pedidos.</p>
+
+    <div class="field">
+      <label>Nombre completo</label>
+      <input type="text" id="name" required>
+    </div>
+    <div class="field">
+      <label>Correo electrónico</label>
+      <input type="email" id="email" required>
+    </div>
+    <div class="field">
+      <label>Contraseña</label>
+      <input type="password" id="password" minlength="6" required>
+    </div>
+
+    <p class="error-msg" id="errorMsg"></p>
+    <button type="submit" class="btn btn-block" id="submitBtn">Crear cuenta</button>
+
+    <p class="form-foot">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+  </form>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© 2026 JOSWEAR. Todos los derechos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ui.js"></script>
+<script>
+  document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = document.getElementById('submitBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    errorMsg.textContent = '';
+    submitBtn.textContent = 'Creando cuenta...';
+    submitBtn.disabled = true;
+
+    try {
+      const data = await apiRequest('/auth/registro', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          password: document.getElementById('password').value
+        })
+      });
+      localStorage.setItem('joswear_token', data.token);
+      localStorage.setItem('joswear_user', JSON.stringify(data.user));
+      window.location.href = 'index.html';
+    } catch (err) {
+      errorMsg.textContent = err.message;
+      submitBtn.textContent = 'Crear cuenta';
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

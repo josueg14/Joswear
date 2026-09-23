@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedido confirmado — JOSWEAR</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="logo">JOS<span>WEAR</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="tienda.html">Tienda</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-auth"></span>
+      <a href="carrito.html" class="cart-link">Carrito <span class="cart-badge">0</span></a>
+    </div>
+    <button class="nav-toggle">☰</button>
+  </nav>
+</header>
+
+<section class="auth-shell">
+  <div class="form-card center">
+    <h1>¡Pedido confirmado!</h1>
+    <p class="lead">Gracias por tu compra en JOSWEAR.</p>
+    <p style="margin-bottom:26px;">Número de pedido: <strong id="orderNumber">—</strong></p>
+    <a href="tienda.html" class="btn btn-block">Seguir comprando</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© 2026 JOSWEAR. Todos los derechos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ui.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  document.getElementById('orderNumber').textContent = '#' + (params.get('order') || '—');
+</script>
+</body>
+</html>

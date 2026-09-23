@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrito — JOSWEAR</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="logo">JOS<span>WEAR</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="tienda.html">Tienda</a>
+      <a href="tienda.html?category=Hombre">Hombre</a>
+      <a href="tienda.html?category=Mujer">Mujer</a>
+      <a href="tienda.html?category=Accesorios">Accesorios</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-auth"></span>
+      <a href="carrito.html" class="cart-link active">Carrito <span class="cart-badge">0</span></a>
+    </div>
+    <button class="nav-toggle">☰</button>
+  </nav>
+</header>
+
+<section class="section wrap">
+  <div class="section-head">
+    <h2 class="section-title">Tu carrito</h2>
+  </div>
+
+  <div class="cart-layout" id="cartLayout">
+    <div id="cartItems"></div>
+    <div class="summary-card">
+      <h3>Resumen</h3>
+      <div class="summary-row"><span>Productos</span><span id="sumCount">0</span></div>
+      <div class="summary-row"><span>Envío</span><span>Calculado en checkout</span></div>
+      <div class="summary-total"><span>Total</span><span id="sumTotal">$0.00</span></div>
+      <a href="checkout.html" class="btn btn-block mt-40" id="checkoutBtn">Ir a pagar</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© 2026 JOSWEAR. Todos los derechos reservados.</span>
+      <a href="tienda.html">Seguir comprando</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ui.js"></script>
+<script>
+  function itemTemplate(item, index) {
+    return `
+      <div class="cart-item">
+        <img src="${item.image}" alt="${item.name}">
+        <div class="cart-item-info">
+          <h3>${item.name}</h3>
+          <p class="meta">Talla: ${item.size} · ${money(item.price)} c/u</p>
+          <div class="qty-control">
+            <button onclick="changeQty(${index}, ${item.quantity - 1})">−</button>
+            <span>${item.quantity}</span>
+            <button onclick="changeQty(${index}, ${item.quantity + 1})">+</button>
+          </div>
+        </div>
+        <div class="cart-item-actions">
+          <strong>${money(item.price * item.quantity)}</strong>
+          <a href="#" class="remove-btn" onclick="removeItem(event, ${index})">Eliminar</a>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderCart() {
+    const cart = getCart();
+    const container = document.getElementById('cartItems');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    if (!cart.length) {
+      container.innerHTML = `<div class="empty-state"><p>Tu carrito está vacío.</p><a href="tienda.html" class="btn mt-40">Ir a la tienda</a></div>`;
+      checkoutBtn.classList.add('hidden');
+    } else {
+      container.innerHTML = cart.map(itemTemplate).join('');
+      checkoutBtn.classList.remove('hidden');
+    }
+
+    document.getElementById('sumCount').textContent = getCartCount();
+    document.getElementById('sumTotal').textContent = money(getCartTotal());
+  }
+
+  function changeQty(index, qty) {
+    if (qty < 1) { removeItemDirect(index); return; }
+    updateQuantity(index, qty);
+    renderCart();
+  }
+
+  function removeItem(e, index) {
+    e.preventDefault();
+    removeItemDirect(index);
+  }
+
+  function removeItemDirect(index) {
+    removeFromCart(index);
+    renderCart();
+  }
+
+  renderCart();
+</script>
+</body>
+</html>

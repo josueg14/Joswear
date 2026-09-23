@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tienda — JOSWEAR</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="logo">JOS<span>WEAR</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="tienda.html" class="active">Tienda</a>
+      <a href="tienda.html?category=Hombre">Hombre</a>
+      <a href="tienda.html?category=Mujer">Mujer</a>
+      <a href="tienda.html?category=Accesorios">Accesorios</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-auth"></span>
+      <a href="carrito.html" class="cart-link">Carrito <span class="cart-badge">0</span></a>
+    </div>
+    <button class="nav-toggle">☰</button>
+  </nav>
+</header>
+
+<section class="section wrap">
+  <div class="section-head">
+    <h2 class="section-title">Tienda</h2>
+    <p class="section-sub" id="resultCount"></p>
+  </div>
+
+  <div class="search-row">
+    <input type="text" id="searchInput" placeholder="Buscar por nombre (ej: hoodie, jogger, gorra)...">
+  </div>
+
+  <div class="filters" id="filterBar">
+    <button class="filter-btn" data-cat="">Todo</button>
+    <button class="filter-btn" data-cat="Hombre">Hombre</button>
+    <button class="filter-btn" data-cat="Mujer">Mujer</button>
+    <button class="filter-btn" data-cat="Accesorios">Accesorios</button>
+  </div>
+
+  <div class="grid" id="productGrid">
+    <p>Cargando productos…</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© 2026 JOSWEAR. Todos los derechos reservados.</span>
+      <a href="index.html">Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/shop.js"></script>
+</body>
+</html>

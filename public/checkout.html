@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finalizar compra — JOSWEAR</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="logo">JOS<span>WEAR</span></a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="tienda.html">Tienda</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-auth"></span>
+      <a href="carrito.html" class="cart-link">Carrito <span class="cart-badge">0</span></a>
+    </div>
+    <button class="nav-toggle">☰</button>
+  </nav>
+</header>
+
+<section class="section wrap">
+  <div class="section-head">
+    <h2 class="section-title">Finalizar compra</h2>
+  </div>
+
+  <div class="cart-layout">
+    <div>
+      <form id="checkoutForm" class="form-card" style="max-width:none;">
+        <h1 style="font-size:24px;">Datos de envío</h1>
+        <p class="lead">Completa tus datos para procesar el pedido.</p>
+
+        <div class="field">
+          <label>Nombre completo</label>
+          <input type="text" id="customer_name" required>
+        </div>
+        <div class="field">
+          <label>Correo electrónico</label>
+          <input type="email" id="customer_email" required>
+        </div>
+        <div class="field">
+          <label>Teléfono</label>
+          <input type="tel" id="phone" required>
+        </div>
+        <div class="field">
+          <label>Dirección</label>
+          <input type="text" id="address" required>
+        </div>
+        <div class="field">
+          <label>Ciudad</label>
+          <input type="text" id="city" required>
+        </div>
+
+        <p class="error-msg" id="errorMsg"></p>
+        <button type="submit" class="btn btn-block" id="submitBtn">Confirmar pedido</button>
+      </form>
+    </div>
+
+    <div class="summary-card">
+      <h3>Tu pedido</h3>
+      <div id="checkoutItems"></div>
+      <div class="summary-total"><span>Total</span><span id="checkoutTotal">$0.00</span></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© 2026 JOSWEAR. Todos los derechos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ui.js"></script>
+<script>
+  const cart = getCart();
+
+  if (!cart.length) {
+    window.location.href = 'tienda.html';
+  }
+
+  const user = getUser();
+  if (user) {
+    document.getElementById('customer_name').value = user.name;
+    document.getElementById('customer_email').value = user.email;
+  }
+
+  document.getElementById('checkoutItems').innerHTML = cart.map((i) => `
+    <div class="summary-row">
+      <span>${i.name} (${i.size}) x${i.quantity}</span>
+      <span>${money(i.price * i.quantity)}</span>
+    </div>
+  `).join('');
+  document.getElementById('checkoutTotal').textContent = money(getCartTotal());
+
+  document.getElementById('checkoutForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = document.getElementById('submitBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    errorMsg.textContent = '';
+    submitBtn.textContent = 'Procesando...';
+    submitBtn.disabled = true;
+
+    const payload = {
+      items: cart,
+      customer_name: document.getElementById('customer_name').value,
+      customer_email: document.getElementById('customer_email').value,
+      phone: document.getElementById('phone').value,
+      address: document.getElementById('address').value,
+      city: document.getElementById('city').value
+    };
+
+    try {
+      const data = await apiRequest('/orders', { method: 'POST', body: JSON.stringify(payload) });
+      clearCart();
+      window.location.href = `confirmacion.html?order=${data.orderId}`;
+    } catch (err) {
+      errorMsg.textContent = err.message;
+      submitBtn.textContent = 'Confirmar pedido';
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

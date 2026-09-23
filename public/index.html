@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JOSWEAR — Ropa urbana</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="logo">JOS<span>WEAR</span></a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Inicio</a>
+      <a href="tienda.html">Tienda</a>
+      <a href="tienda.html?category=Hombre">Hombre</a>
+      <a href="tienda.html?category=Mujer">Mujer</a>
+      <a href="tienda.html?category=Accesorios">Accesorios</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-auth"></span>
+      <a href="carrito.html" class="cart-link">
+        Carrito <span class="cart-badge">0</span>
+      </a>
+    </div>
+    <button class="nav-toggle">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-grid wrap" style="padding-left:0; padding-right:0;">
+    <div class="hero-copy">
+      <p class="hero-tag">Colección 2026 — ya disponible</p>
+      <h1 class="hero-title">VESTITE<br>DESDE LA<br><em>CALLE.</em></h1>
+      <p class="hero-desc">Prendas con corte oversize, materiales pesados y detalles utilitarios. Diseñado para moverte por la ciudad sin pasar desapercibido.</p>
+      <div class="hero-actions">
+        <a href="tienda.html" class="btn">Ver la tienda</a>
+        <a href="tienda.html?category=Hombre" class="btn btn-outline">Nuevos ingresos</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="https://picsum.photos/seed/joswear-hero/900/1100" alt="Modelo con hoodie oversize JOSWEAR">
+      <span class="price-tag">Hoodie Oversize — $45.99</span>
+    </div>
+  </div>
+</section>
+
+<div class="cat-strip">
+  <a class="cat-card" href="tienda.html?category=Hombre">
+    <img src="https://picsum.photos/seed/joswear-cat-hombre/500/500" alt="Categoría Hombre">
+    <span>HOMBRE</span>
+  </a>
+  <a class="cat-card" href="tienda.html?category=Mujer">
+    <img src="https://picsum.photos/seed/joswear-cat-mujer/500/500" alt="Categoría Mujer">
+    <span>MUJER</span>
+  </a>
+  <a class="cat-card" href="tienda.html?category=Accesorios">
+    <img src="https://picsum.photos/seed/joswear-cat-acc/500/500" alt="Categoría Accesorios">
+    <span>ACCESORIOS</span>
+  </a>
+</div>
+
+<section class="section wrap">
+  <div class="section-head">
+    <h2 class="section-title">Lo más pedido</h2>
+    <p class="section-sub">Las piezas que no paran de salir del almacén esta temporada.</p>
+  </div>
+  <div class="grid" id="featuredGrid">
+    <p>Cargando productos…</p>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="t-grid wrap" style="padding:0;">
+    <div class="t-card">
+      <p class="t-quote">"La calidad de las telas no tiene comparación con lo que encontraba antes. El hoodie ya es mi favorito."</p>
+      <p class="t-name">Andrea M.</p>
+    </div>
+    <div class="t-card">
+      <p class="t-quote">"Pedí un jogger y llegó en dos días, tal cual la foto. Ya voy por mi tercera compra."</p>
+      <p class="t-name">Kevin R.</p>
+    </div>
+    <div class="t-card">
+      <p class="t-quote">"El corte oversize del blazer es exactamente lo que buscaba. Se nota que piensan en cada detalle."</p>
+      <p class="t-name">Fernanda L.</p>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter wrap">
+  <h2 class="section-title">Súmate al inner circle</h2>
+  <p class="section-sub" style="margin:10px auto 0;">Acceso anticipado a lanzamientos y descuentos exclusivos por correo.</p>
+  <form id="newsletterForm">
+    <input type="email" placeholder="tu@correo.com" required>
+    <button type="submit" class="btn">Suscribirme</button>
+  </form>
+  <p class="success-msg hidden" id="newsletterMsg">¡Listo! Revisa tu correo pronto.</p>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="footer-logo">JOS<span>WEAR</span></p>
+        <p>Ropa urbana hecha para quienes marcan su propio paso.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Tienda</h4>
+        <a href="tienda.html?category=Hombre">Hombre</a>
+        <a href="tienda.html?category=Mujer">Mujer</a>
+        <a href="tienda.html?category=Accesorios">Accesorios</a>
+      </div>
+      <div class="footer-col">
+        <h4>Cuenta</h4>
+        <a href="login.html">Iniciar sesión</a>
+        <a href="registro.html">Crear cuenta</a>
+        <a href="carrito.html">Mi carrito</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ayuda</h4>
+        <p>soporte@joswear.com</p>
+        <p>Lun–Vie, 9am–6pm</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 JOSWEAR. Todos los derechos reservados.</span>
+      <span>Envíos a todo el país</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ui.js"></script>
+<script>
+  let featuredCache = [];
+
+  async function loadFeatured() {
+    const grid = document.getElementById('featuredGrid');
+    try {
+      featuredCache = await apiRequest('/products?featured=1');
+      if (!featuredCache.length) {
+        grid.innerHTML = '<p>No hay productos destacados por ahora.</p>';
+        return;
+      }
+      grid.innerHTML = featuredCache.map(cardTemplate).join('');
+    } catch (err) {
+      grid.innerHTML = `<p>No se pudieron cargar los productos: ${err.message}</p>`;
+    }
+  }
+
+  function cardTemplate(p) {
+    const sizeOptions = p.sizes.map((s) => `<option value="${s}">${s}</option>`).join('');
+    return `
+      <div class="card">
+        <div class="card-media">
+          <span class="card-tag">${p.category}</span>
+          <img src="${p.image}" alt="${p.name}">
+        </div>
+        <div class="card-body">
+          <div class="card-name">${p.name}</div>
+          <div class="card-price">${money(p.price)}</div>
+          <select class="card-select" id="size-${p.id}">${sizeOptions}</select>
+          <div class="card-actions">
+            <button class="btn btn-block btn-sm" onclick="quickAdd(${p.id})">Agregar al carrito</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function quickAdd(id) {
+    const product = featuredCache.find((p) => p.id === id);
+    const size = document.getElementById(`size-${id}`).value;
+    addToCart(product, size, 1);
+  }
+
+  document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.target.reset();
+    document.getElementById('newsletterMsg').classList.remove('hidden');
+  });
+
+  loadFeatured();
+</script>
+</body>
+</html>
