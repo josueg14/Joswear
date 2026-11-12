@@ -3,7 +3,7 @@ services:
     name: joswear
     runtime: node
     plan: free
-    buildCommand: npm ci && NODE_OPTIONS=--max-old-space-size=384 npm run build
+    buildCommand: npm ci --include=dev && NODE_OPTIONS=--max-old-space-size=384 npm run build
     startCommand: npm run db:migrate && npm run admin:bootstrap:if-configured && npm start
     healthCheckPath: /api/health
     envVars:
