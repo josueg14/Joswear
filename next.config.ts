@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 const config: NextConfig = {
-  experimental: { cpus: 2 },
+  experimental: { cpus: 1 },
+  // GitHub Actions runs `npm run typecheck`; skip Next's duplicate check on Render's 512 MB tier.
+  typescript: { ignoreBuildErrors: true },
   turbopack: { root: process.cwd() },
   async redirects() {
     return [
