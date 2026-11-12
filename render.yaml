@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: joswear
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm run db:migrate && npm run admin:bootstrap:if-configured && npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 24.21.0
+      - key: DEMO_MODE
+        value: "false"
+      - key: EMAIL_MODE
+        value: sandbox
+      - key: PAYMENT_PROVIDER
+        value: disabled
+      - key: DATABASE_URL
+        sync: false
+      - key: APP_URL
+        value: https://joswear.onrender.com
+      - key: MFA_ENCRYPTION_KEY
+        sync: false
+      - key: BOOTSTRAP_USERNAME
+        sync: false
+      - key: BOOTSTRAP_PASSWORD
+        sync: false
+      - key: BOOTSTRAP_TOTP_SECRET
+        sync: false
